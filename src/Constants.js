@@ -33,4 +33,6 @@ export const CategoryTypes = Object.freeze({
   TECHNOLOGY: 'technology'
 })
 
-export const SmallScreenBreakpoint = 350
+export const SmallScreenBreakpoint = 450
+
+export const NumOfArticles = 5

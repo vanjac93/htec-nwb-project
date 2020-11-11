@@ -1,17 +1,16 @@
 import styled, { css } from 'styled-components'
+import { ArrowLeftCircle, ArrowRightCircle } from '@styled-icons/feather'
 
 export const Slider = styled.div`
   position: relative;
   border-radius: 5px;
   width: 100%;
-  /* height: 200px; */
-  margin: 10px 0px;
   overflow: hidden;
-  /* display: flex; */
   ${props => props.open ? css`
     opacity: 1;
     display: flex;
     height: 200px;
+    margin: 10px 0px;
   `
     :
     css`
@@ -20,7 +19,6 @@ export const Slider = styled.div`
     height: 0;
   `
 }
-  /* display: ${props => props.open ? 'flex' : 'none'}; */
   transition: opacity 1s ease-in-out;
 `
 
@@ -42,4 +40,59 @@ export const SliderContainer = styled.div`
   background-color: aliceblue;
   padding: 5px;
   margin: 10px 0px;
+`
+
+export const HeaderDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+`
+
+export const StyledArrowLeftCircle = styled(ArrowLeftCircle)`
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+  left: 5px; 
+  top: 50%;
+  transform: translate(0,-50%);
+`
+
+export const StyledArrowRightCircle = styled(ArrowRightCircle)`
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+  right: 5px; 
+  top: 50%;
+  transform: translate(0,-50%);
+`
+
+export const ArticleText = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  & > h4 {
+    margin: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  p:first-of-type {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+`
+
+export const SlideImg = styled.img`
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px; 
+  width: calc(50% - 10px);
 `

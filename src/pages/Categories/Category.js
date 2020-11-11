@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import swal from 'sweetalert'
 import { Context } from '~/App'
@@ -13,6 +14,7 @@ export default function Category() {
     loading: false,
     articles: []
   })
+  const {t} = useTranslation()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +37,7 @@ export default function Category() {
 
   const {articles,error,loading} = data
   return (
-    <CommonLayout loading={loading} error={error}>
-      <h3>
-        {`Top ${category} news in ${lan.label}`}
-      </h3>
+    <CommonLayout header={t('Top news in {{category}}', {category})} loading={loading} error={error}>
       <CardsComponent articles={articles} />
     </CommonLayout>
   )

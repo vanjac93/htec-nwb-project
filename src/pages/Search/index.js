@@ -8,6 +8,7 @@ import swal from 'sweetalert'
 import CardsComponent from '~/common/CardsComponent'
 import { useLocation } from 'react-router-dom'
 import {useTranslation} from 'react-i18next'
+import Loader from '~/common/Loader'
 
 const StyledInput = styled.input`
   background-color: aliceblue;
@@ -27,7 +28,8 @@ export default function Search() {
   const {t} = useTranslation()
   const [data, setData] = useState({
     articles: [],
-    loading: false
+    loading: false,
+    noResults: false
   })
 
   const searchNews = useCallback((
@@ -36,15 +38,25 @@ export default function Search() {
         setData({...data, loading: true})
         try {
           const response = await searchApi.getArticlesByQuery(lan.id, encodeURIComponent(queryVal))
-          setData({...data, articles: response.data.articles, loading: false})
+          setData({
+            ...data,
+            articles: response.data.articles,
+            noResults: response.data.articles.length > 0 ? false: true,
+            loading: false
+          })
           window.location.hash = queryVal
         } catch (error) {
-          setData({...data, loading: false, error: error.response.data.message ? error.response.data.message : true})
+          setData({
+            ...data,
+            loading: false,
+            noResults: false,
+            error: error.response.data.message ? error.response.data.message : true
+          })
           swal({ icon: 'warning', title: 'Error', text: error.response.data.message })
         }
       } else {
         window.history.pushState('', document.title, window.location.pathname + window.location.search)
-        setData({...data, articles:  []})
+        setData({...data, articles:  [], noResults: false})
       }
     }, 700)
   ), [lan])
@@ -68,23 +80,26 @@ export default function Search() {
     searchNews(value)
   }
 
-  const {articles, loading, error} = data
+  const {articles, loading, error, noResults} = data
+
+  const renderResults = () => {
+    if(articles.length) {
+      return <CardsComponent articles={articles} />
+    }
+    if(loading) {
+      return <Loader />
+    }
+    if(noResults) {
+      return <p style={{textAlign: 'center'}}>{t('No results.')}</p>
+    }
+  }
+
   return (
-    <CommonLayout error={error}>
+    <CommonLayout header={t('Search top news by term')} error={error}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {
-          loading ?
-            <label>Loading...</label>
-            :
-            <h3>{t('Search top news by term')}</h3>
-        }
         <StyledInput placeholder={t('Search term...')} value={query} onChange={handleInputChange} />
       </div>
-      {articles.length > 0 ?
-        <CardsComponent articles={articles} />
-        :
-        <p>{t('No results found')}</p>
-      }
+      {renderResults()}
     </CommonLayout>
   )
 }

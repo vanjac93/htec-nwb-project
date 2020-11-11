@@ -3,14 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import Menu from '~/common/Menu'
 import { Routes } from '~/Constants'
-// import Categories from './Categories'
-// import Category from './Categories/Category'
-// import Search from './Search'
-// import TopNews from './TopNews'
-// import Article from './TopNews/Article'
 import Error from './Error'
 
-const Article = React.lazy(() => import('./TopNews/Article'))
+const Article = React.lazy(() => import('./Article'))
 const Categories = React.lazy(() => import('./Categories'))
 const Category = React.lazy(() => import('./Categories/Category'))
 const Search = React.lazy(() => import('./Search'))

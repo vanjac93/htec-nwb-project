@@ -1,13 +1,14 @@
 import { ArrowLeftCircle } from '@styled-icons/feather'
 import React, { useEffect, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import swal from 'sweetalert'
 import { Context } from '~/App'
 import CommonLayout from '~/common/CommonLayout'
 import topNewsApi from '~/services/topNewsApi'
 import type { ArticleType } from '~/types/ArticleType'
+import {Routes} from '~/Constants'
 
 const GoBackDiv = styled.div`
     display: flex;
@@ -19,6 +20,10 @@ const GoBackDiv = styled.div`
         cursor: pointer;
         background-color: aquamarine;
     }
+`
+
+const StyledImage = styled.img`
+  width: 100%;
 `
 
 export default function Article() {
@@ -36,6 +41,8 @@ export default function Article() {
         const foundArticle = response.data.articles.find((article: ArticleType) => article.title === decodeURIComponent(title))
         if (foundArticle) {
           setArticle(foundArticle)
+        } else {
+          history.push(Routes.ERROR)
         }
       } catch (error) {
         swal({ icon: 'warning', title: error.response.data.message })
@@ -53,20 +60,27 @@ export default function Article() {
     return <div />
   }
 
+  const handleLinkClick = e => {
+    e.stopPropagation()
+    e.preventDefault()
+    history.goBack()
+  }
+
   const { urlToImage, content } = article
   return (
-    <CommonLayout >
-      <h3>
-        {article.title}
-      </h3>
-      <img style={{ width: '100%' }} src={urlToImage} alt="" />
+    <CommonLayout header={article.title}>
+      <StyledImage src={urlToImage} alt="" />
       {content &&
         <p>{content}</p>
       }
-      <GoBackDiv onClick={() => history.goBack()} >
-        <ArrowLeftCircle style={{ cursor: 'pointer', marginRight: 10 }} size={20} />
-        {t('Go back')}
-      </GoBackDiv>
+      {history.location.state && history.location.state.from &&
+        <Link to="" onClick={handleLinkClick}>
+          <GoBackDiv >
+            <ArrowLeftCircle style={{ cursor: 'pointer', marginRight: 10 }} size={20} />
+            {t('Go back')}
+          </GoBackDiv>
+        </Link>
+      }
     </CommonLayout>
   )
 }

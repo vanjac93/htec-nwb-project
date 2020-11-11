@@ -31,6 +31,9 @@ const MenuButton = styled.button`
         cursor: pointer;
         background-color: ${({ isActive }: ButtonProps) => isActive ? 'cadetblue' : '#b3cfe7'};
     }
+    &:disabled {
+      cursor: not-allowed;
+    }
     ${({ isActive }: ButtonProps) => isActive && css`
         background-color:cadetblue;
     `
@@ -100,18 +103,22 @@ export default function Menu() {
     </div>
   }
 
+  const renderLanguages = () => {
+    return <div>
+      {
+        Object.values(Languages).map((language: LanType) => <MenuButton key={language.id} disabled={!lanEnabled}
+          onClick={() => handleLanguageChange(language)}
+          isActive={lan.id === language.id}>
+          {language.id.toUpperCase()}
+        </MenuButton>)
+      }
+    </div>
+  }
+
   return (
     <StyledMenu>
       {renderLeftMenu()}
-      <div>
-        {
-          Object.values(Languages).map((language: LanType) => <MenuButton key={language.id} disabled={!lanEnabled}
-            onClick={() => handleLanguageChange(language)}
-            isActive={lan.id === language.id}>
-            {language.id.toUpperCase()}
-          </MenuButton>)
-        }
-      </div>
+      {renderLanguages()}
     </StyledMenu>
   )
 }
