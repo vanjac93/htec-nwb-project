@@ -9,13 +9,34 @@
     "start": "nwb serve-react-app",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "lint": "eslint src tests",
+    "lint:fix": "eslint --fix src",
+    "flow": "flow",
+    "flow:deps": "flow-typed install"
   },
   "dependencies": {
+    "axios": "^0.21.0",
+    "flow-typed": "^3.2.1",
+    "i18next": "^19.8.3",
+    "lodash.debounce": "^4.0.8",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-i18next": "^11.7.3",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1",
+    "styled-icons": "^10.22.0",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-flow": "^7.12.1",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-plugin-react": "^7.21.5",
+    "flow-bin": "^0.137.0",
     "nwb": "0.25.x"
   },
   "author": "",

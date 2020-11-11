@@ -1,19 +1,38 @@
-import './App.css'
+// @flow
+import RouterComponent from './pages/RouterComponent'
+import React, { useState } from 'react'
+import i18n from './services/i18n'
+import env from './env'
 
-import React, {Component} from 'react'
+export const Context = React.createContext({
+  lan: env.lan,
+  handleLanguageChange: () => { },
+  setLanEnabled: () => { },
+  lanEnabled: true
+})
 
-class App extends Component {
-  render() {
-    return <div className="App">
-      <div className="App-heading App-flex">
-        <h2>Welcome to <span className="App-react">React</span></h2>
-      </div>
-      <div className="App-instructions App-flex">
-        <img className="App-logo" src={require('./react.svg')}/>
-        <p>Edit <code>src/App.js</code> and save to hot reload your changes.</p>
-      </div>
-    </div>
+function App() {
+  const [lan, setLan] = useState(env.lan)
+  const [lanEnabled, setLanEnabled] = useState(true)
+
+  const handleLanguageChange = lan => {
+    i18n.changeLanguage(lan.id)
+    setLan(lan)
   }
+
+  return (
+    <>
+      <Context.Provider
+        value={{
+          setLanEnabled: (enable: boolean) => setLanEnabled(enable),
+          lan,
+          lanEnabled,
+          handleLanguageChange: handleLanguageChange
+        }}>
+        <RouterComponent />
+      </Context.Provider>
+    </>
+  )
 }
 
 export default App

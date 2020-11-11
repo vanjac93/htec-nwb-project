@@ -1,0 +1,38 @@
+import React, { Suspense } from 'react'
+import { useTranslation } from 'react-i18next'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import Menu from '~/common/Menu'
+import { Routes } from '~/Constants'
+// import Categories from './Categories'
+// import Category from './Categories/Category'
+// import Search from './Search'
+// import TopNews from './TopNews'
+// import Article from './TopNews/Article'
+import Error from './Error'
+
+const Article = React.lazy(() => import('./TopNews/Article'))
+const Categories = React.lazy(() => import('./Categories'))
+const Category = React.lazy(() => import('./Categories/Category'))
+const Search = React.lazy(() => import('./Search'))
+const TopNews = React.lazy(() => import('./TopNews'))
+
+
+export default function RouterComponent() {
+  const { t } = useTranslation()
+  return (
+    <Router>
+      <Menu />
+      <Suspense fallback={<p>{t('Loading...')}</p>}>
+        <Switch>
+          <Route exact path={[Routes.HOME, '/', Routes.TOP_NEWS]} component={TopNews} />
+          <Route exact path={Routes.CATEGORIES} component={Categories} />
+          <Route exact path={Routes.CATEGORY} component={Category} />
+          <Route exact path={Routes.SEARCH} component={Search} />
+          <Route exact path={Routes.ERROR} component={Error} />
+          <Route exact path={Routes.ARTICLE} component={Article} />
+          <Redirect from="/*" to={Routes.ERROR} />
+        </Switch>
+      </Suspense>
+    </Router>
+  )
+}
