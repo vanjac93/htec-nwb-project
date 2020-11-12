@@ -18,7 +18,6 @@ const GoBackDiv = styled.div`
     border-radius: 5px;
     &:hover {
         cursor: pointer;
-        background-color: aquamarine;
     }
 `
 
@@ -74,12 +73,13 @@ export default function Article() {
         <p>{content}</p>
       }
       {history.location.state && history.location.state.from &&
-        <Link to="" onClick={handleLinkClick}>
           <GoBackDiv >
-            <ArrowLeftCircle style={{ cursor: 'pointer', marginRight: 10 }} size={20} />
-            {t('Go back')}
+            <Link to="" onClick={handleLinkClick}>
+              <ArrowLeftCircle style={{ cursor: 'pointer', marginRight: 10 }} size={20} />
+              {t('Go back')}
+            </Link>
+
           </GoBackDiv>
-        </Link>
       }
     </CommonLayout>
   )

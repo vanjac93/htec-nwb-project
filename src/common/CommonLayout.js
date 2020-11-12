@@ -49,7 +49,11 @@ export default function CommonLayout({ loading, header, children, error }: Commo
 
   return (
     <ContentDiv>
-      <StyledHeader>{header}</StyledHeader>
+      {header &&
+      <StyledHeader>
+        {header}
+      </StyledHeader>
+      }
       {
         loading ?
           <Dimmer>

@@ -36,7 +36,7 @@ export default function TopNews() {
 
   const { articles, loading, error } = data
   return (
-    <CommonLayout header={t('Top news')} error={error} loading={loading}>
+    <CommonLayout error={error} loading={loading}>
       {articles.length > 0 ?
         <>
           <CardsComponent articles={articles} />

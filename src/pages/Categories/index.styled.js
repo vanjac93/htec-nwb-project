@@ -41,6 +41,10 @@ export const SliderContainer = styled.div`
   padding: 5px;
   margin: 10px 0px;
   border-radius: 4px;
+  background-color: #ce6262;
+  * {
+    color: white;
+  }
 `
 
 export const HeaderDiv = styled.div`

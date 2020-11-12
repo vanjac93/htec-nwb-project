@@ -20,7 +20,7 @@ const StyledMenu = styled.div`
     height: ${props => props.theme.menu.height};
     border-bottom: 1px solid #8a7f8a;
     box-sizing: border-box; 
-    background-color: #b3cfe7;
+    background-color: #e9ddc8;
 `
 
 const MenuButton = styled.button`
@@ -29,16 +29,16 @@ const MenuButton = styled.button`
     outline: inherit;
     padding: 10px;
     /* color: white; */
-    background-color: #b3cfe7;
+    background-color: #e9ddc8;
     &:hover:enabled {
         cursor: pointer;
-        background-color: ${({ isActive }: ButtonProps) => isActive ? 'cadetblue' : '#99c8c9'};
+        background-color: ${({ isActive }: ButtonProps) => isActive ? '#ffa042' : '#fbc289'};
     }
     &:disabled {
       cursor: not-allowed;
     }
     ${({ isActive }: ButtonProps) => isActive && css`
-        background-color: cadetblue;
+        background-color: #ffa042;
     `
 }
 `

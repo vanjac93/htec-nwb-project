@@ -3,6 +3,6 @@ export default {
     height: 40
   },
   layout: {
-    backgroundColor: '#c4dbdc'
+    backgroundColor: '#e9ddc8'
   }
 }
