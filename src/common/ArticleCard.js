@@ -15,7 +15,7 @@ const StyledCardDiv = styled.div`
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
-    background-color: #ce6262;
+    background-color: ${props => props.theme.layout.topNews.cardBackgroundColor};
     color: white;
     box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
                 0 2px 2px rgba(0,0,0,0.12), 

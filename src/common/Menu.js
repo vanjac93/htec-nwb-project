@@ -20,7 +20,7 @@ const StyledMenu = styled.div`
     height: ${props => props.theme.menu.height};
     border-bottom: 1px solid #8a7f8a;
     box-sizing: border-box; 
-    background-color: #e9ddc8;
+    background-color: ${props => props.theme.menu.backgroundColor};
 `
 
 const MenuButton = styled.button`
@@ -28,17 +28,16 @@ const MenuButton = styled.button`
     height: 100%;
     outline: inherit;
     padding: 10px;
-    /* color: white; */
-    background-color: #e9ddc8;
+    background-color: ${props => props.theme.menu.backgroundColor};
     &:hover:enabled {
         cursor: pointer;
-        background-color: ${({ isActive }: ButtonProps) => isActive ? '#ffa042' : '#fbc289'};
+        background-color: ${({ isActive, theme: {menu: {activeButton, hoveringButton}} }: ButtonProps) => isActive ? activeButton : hoveringButton};
     }
     &:disabled {
       cursor: not-allowed;
     }
-    ${({ isActive }: ButtonProps) => isActive && css`
-        background-color: #ffa042;
+    ${({ isActive, theme: {menu: {activeButton}} }: ButtonProps) => isActive && css`
+        background-color: ${activeButton};
     `
 }
 `
