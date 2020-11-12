@@ -26,12 +26,12 @@ export const Languages = Object.freeze({
 })
 
 export const CategoryTypes = Object.freeze({
-  ENTERTAINMENT: 'entertainment',
-  SCIENCE: 'science',
-  GENERAL: 'general',
-  HEALTH: 'health',
-  SPORTS: 'sports',
-  TECHNOLOGY: 'technology'
+  ENTERTAINMENT: 'Entertainment',
+  SCIENCE: 'Science',
+  GENERAL: 'General',
+  HEALTH: 'Health',
+  SPORTS: 'Sports',
+  TECHNOLOGY: 'Technology'
 })
 
 export const SmallScreenBreakpoint = 450

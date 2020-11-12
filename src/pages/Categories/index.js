@@ -7,8 +7,8 @@ import { Context } from '~/App'
 import CommonLayout from '~/common/CommonLayout'
 import { CategoryTypes, Routes } from '~/Constants'
 import categoriesApi from '~/services/categoriesApi'
-import { SlideItem, Slider, StyledArrowLeftCircle, ArticleText,
-  StyledArrowRightCircle, HeaderDiv, SliderContainer, SlideImg } from './index.styled'
+import { SlideItem, Slider, StyledArrowLeftCircle, ArticleText, SlideRightDiv,
+  StyledArrowRightCircle, SlideLeftDiv, HeaderDiv, SliderContainer, SlideImg } from './index.styled'
 import {MoreDiv} from '~/common/ArticleCard'
 
 const Slide = {
@@ -114,8 +114,11 @@ export default function Categories() {
             </HeaderDiv>
             {<Slider open={category.open} key={index}>
               {showLeftArrow &&
-              <StyledArrowLeftCircle color="teal"
-                onClick={() => handleSlide(index, Slide.LEFT)} size={30} />}
+              <SlideLeftDiv onClick={() => handleSlide(index, Slide.LEFT)}>
+                <StyledArrowLeftCircle color="white"
+                  size={30} />
+              </SlideLeftDiv>
+              }
               {
                 category.articles.map((article) => {
                   return <SlideItem key={article.url} x={positions[index]}>
@@ -136,8 +139,10 @@ export default function Categories() {
                 })
               }
               {showRightArrow &&
-              <StyledArrowRightCircle color="teal"
-                onClick={() => handleSlide(index, Slide.RIGHT)} size={30} />
+              <SlideRightDiv onClick={() => handleSlide(index, Slide.RIGHT)}>
+                <StyledArrowRightCircle color="white"
+                  size={30} />
+              </SlideRightDiv>
               }
             </Slider>}
           </SliderContainer>

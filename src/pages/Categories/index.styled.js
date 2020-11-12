@@ -42,7 +42,7 @@ export const SliderContainer = styled.div`
   margin: 10px 0px;
   border-radius: 4px;
   background-color: #ce6262;
-  * {
+  p, h4 {
     color: white;
   }
 `
@@ -100,4 +100,30 @@ export const SlideImg = styled.img`
   border-radius: 4px;
   padding: 5px; 
   width: calc(50% - 10px);
+`
+
+export const SlideLeftDiv = styled.div`
+  position: absolute;
+  left: 0px;
+  width: 40px;
+  height: 100%;
+  :hover {
+    background-color: grey;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  z-index: 5;
+`
+
+export const SlideRightDiv = styled.div`
+  position: absolute;
+  right: 0px;
+  width: 40px;
+  height: 100%;
+  :hover {
+    background-color: grey;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  z-index: 5;
 `

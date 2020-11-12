@@ -11,7 +11,7 @@ let envLocal = {}
 try {
   envLocal = require('./env.local')
 } catch(e) {
-
+  //
 }
 
 const mergedEnvironment = {

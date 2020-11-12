@@ -2,9 +2,9 @@
 import RouterComponent from './pages/RouterComponent'
 import React, { useState } from 'react'
 import i18n from './services/i18n'
-import env from './env'
 import { ThemeProvider } from 'styled-components'
 import theme from './theme'
+import env from './env'
 
 export const Context = React.createContext({
   lan: env.lan,

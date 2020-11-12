@@ -15,10 +15,12 @@ i18n
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default
     },
-    // load: 'all',
     keySeparator: false,
     saveMissing: true,
-    resources: {}
+    resources: {},
+    react: {
+      wait: false
+    }
   })
 
 i18n.addResourceBundle('ru', 'translation', russianResourceBundle, true, true)
