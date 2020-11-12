@@ -11,9 +11,7 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
     "lint": "eslint src tests",
-    "lint:fix": "eslint --fix src",
-    "flow": "flow",
-    "flow:deps": "flow-typed install"
+    "lint:fix": "eslint --fix src"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -36,10 +34,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.13.0",
     "eslint-plugin-react": "^7.21.5",
-    "file-loader": "^6.2.0",
-    "flow-bin": "^0.137.0",
-    "nwb": "0.25.x",
-    "url-loader": "^4.1.1"
+    "nwb": "0.25.x"
   },
   "author": "",
   "license": "MIT",
