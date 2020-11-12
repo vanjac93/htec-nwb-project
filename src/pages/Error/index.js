@@ -9,7 +9,7 @@ export default function Error() {
   return (
     <CommonLayout header={t('Something went wrong.')}>
       <Link to={Routes.HOME}>
-        {t('The page you requested does not exist. Click here to go to home page.')}
+        <p style={{textAlign: 'center'}}>{t('The page you requested does not exist. Click here to go to home page.')}</p>
       </Link>
     </CommonLayout>
   )

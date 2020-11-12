@@ -20,31 +20,50 @@ const StyledInput = styled.input`
   padding-left: 10px;
 `
 
+const search = async (query: string) => {
+  try {
+    const response = await searchApi.getArticlesByQuery(lan.id, encodeURIComponent(query))
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
 
 export default function Search() {
-  const [query, setQuery] = useState('')
   const { lan } = useContext(Context)
-  const { hash } = useLocation()
+  const {hash} = useLocation()
   const {t} = useTranslation()
   const [data, setData] = useState({
     articles: [],
     loading: false,
-    noResults: false
+    noResults: false,
+    query: ''
   })
 
-  const searchNews = useCallback((
-    debounce(async (queryVal: string) => {
-      if (queryVal) {
-        setData({...data, loading: true})
+  const debouncedHashUpdate = useCallback((
+    debounce((queryVal: string) => {
+      if(queryVal) {
+        window.location.hash = queryVal
+      } else {
+        window.location.hash = ''
+      }
+    }, 500)), [lan])
+
+  useEffect(() => {
+    if(hash) {
+      const query = hash.split('#')[1]
+
+      const searchByQuery = async () => {
+        setData({...data, loading: true, query})
         try {
-          const response = await searchApi.getArticlesByQuery(lan.id, encodeURIComponent(queryVal))
+          const response = await searchApi.getArticlesByQuery(lan.id, encodeURIComponent(query))
           setData({
             ...data,
+            query,
             articles: response.data.articles,
             noResults: response.data.articles.length > 0 ? false: true,
             loading: false
           })
-          window.location.hash = queryVal
         } catch (error) {
           setData({
             ...data,
@@ -52,35 +71,27 @@ export default function Search() {
             noResults: false,
             error: error.response.data.message ? error.response.data.message : true
           })
-          swal({ icon: 'warning', title: 'Error', text: error.response.data.message })
+          swal({ icon: 'warning', title: t('Error'), text: error.response.data.message })
         }
-      } else {
-        window.history.pushState('', document.title, window.location.pathname + window.location.search)
-        setData({...data, articles:  [], noResults: false})
       }
-    }, 700)
-  ), [lan])
 
-  useEffect(() => {
-    if (hash) {
-      const hashQuery = hash.split('#')[1]
-      setQuery(hashQuery)
-      searchNews(hashQuery)
+      searchByQuery()
+    } else {
+      setData({...data, articles:  [], noResults: false, query: ''})
     }
-  }, [])
+  }, [hash, lan])
 
-  useEffect(() => {
-    if (query) {
-      searchNews(query)
-    }
-  }, [searchNews, query])
 
   const handleInputChange = ({ currentTarget: { value } }: SyntheticEvent<HTMLInputElement>) => {
-    setQuery(value)
-    searchNews(value)
+    setData({...data, query: value})
+    if(!value) {
+      window.location.hash = ''
+    } else {
+      debouncedHashUpdate(value)
+    }
   }
 
-  const {articles, loading, error, noResults} = data
+  const {articles, loading, query, error, noResults} = data
 
   const renderResults = () => {
     if(articles.length) {

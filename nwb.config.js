@@ -7,8 +7,16 @@ module.exports = {
     umd: false
   },
   webpack: {
+    publicPath: '/',
     aliases: {
       '~': path.resolve('src')
+    },
+    extra: {
+      module: {
+        rules: [
+          {test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader'}
+        ]
+      }
     }
   },
   babel: {

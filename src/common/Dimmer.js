@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const DimmerDiv = styled.div`
-    background-color: grey;
+    /* background-color: #f2f2f2; */
     opacity: 0.5;
     width: 100%;
     height: 100%;

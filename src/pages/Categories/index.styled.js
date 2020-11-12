@@ -40,6 +40,7 @@ export const SliderContainer = styled.div`
   background-color: aliceblue;
   padding: 5px;
   margin: 10px 0px;
+  border-radius: 4px;
 `
 
 export const HeaderDiv = styled.div`
@@ -73,7 +74,7 @@ export const ArticleText = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
-  & > h4 {
+  & * h4 {
     margin: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -81,7 +82,7 @@ export const ArticleText = styled.div`
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
-  p:first-of-type {
+  & * p:first-of-type {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

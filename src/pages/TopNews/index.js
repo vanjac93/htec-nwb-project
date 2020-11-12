@@ -27,7 +27,7 @@ export default function TopNews() {
           loading: false,
           error: error.response.data.message ? error.response.data.message : true
         }))
-        swal({ icon: 'warning', title: t('Something went wrong!'), text: error.response.data.message })
+        swal({ icon: 'warning', title: t('Error'), text: error.response.data.message })
       }
     }
 

@@ -42,7 +42,7 @@ export default function Article() {
         if (foundArticle) {
           setArticle(foundArticle)
         } else {
-          history.push(Routes.ERROR)
+          history.replace(Routes.ERROR)
         }
       } catch (error) {
         swal({ icon: 'warning', title: error.response.data.message })

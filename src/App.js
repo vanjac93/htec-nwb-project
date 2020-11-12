@@ -3,6 +3,8 @@ import RouterComponent from './pages/RouterComponent'
 import React, { useState } from 'react'
 import i18n from './services/i18n'
 import env from './env'
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
 
 export const Context = React.createContext({
   lan: env.lan,
@@ -22,15 +24,17 @@ function App() {
 
   return (
     <>
-      <Context.Provider
-        value={{
-          setLanEnabled: (enable: boolean) => setLanEnabled(enable),
-          lan,
-          lanEnabled,
-          handleLanguageChange: handleLanguageChange
-        }}>
-        <RouterComponent />
-      </Context.Provider>
+      <ThemeProvider theme={theme}>
+        <Context.Provider
+          value={{
+            setLanEnabled: (enable: boolean) => setLanEnabled(enable),
+            lan,
+            lanEnabled,
+            handleLanguageChange: handleLanguageChange
+          }}>
+          <RouterComponent />
+        </Context.Provider>
+      </ThemeProvider>
     </>
   )
 }

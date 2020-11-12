@@ -12,38 +12,52 @@ type CommonLayoutType = {
   header: string
 }
 
+const ContentDiv = styled.div`
+  padding: 20px;
+  background-color: ${props => props.theme.layout.backgroundColor};
+  min-height: ${props => `calc(100% - ${props.theme.menu.height}px)`};
+  box-sizing: border-box;
+  position: relative;
+`
 
 const StyledHeader = styled.h4`
   text-align: center;
+  margin: 10px;
+`
+
+const BackToTop = styled.div`
+  position: sticky;
+  top: ${props => `${props.theme.menu.height}px`};
+  top: 0;
+  right: 0px;
+  z-index: 10;
 `
 
 export default function CommonLayout({ loading, header, children, error }: CommonLayoutType) {
   const {t} = useTranslation()
   if(error) {
-    return <div>
-      <h3>
+    return <ContentDiv>
+      <StyledHeader>
         {typeof error === 'string' ?
           error
           :
           t('Something went wrong!')
         }
-      </h3>
-    </div>
+      </StyledHeader>
+    </ContentDiv>
   }
 
   return (
-    <>
+    <ContentDiv>
+      <StyledHeader>{header}</StyledHeader>
       {
         loading ?
           <Dimmer>
             <Loader />
           </Dimmer>
           :
-          <div style={{ padding: 10 }}>
-            <StyledHeader>{header}</StyledHeader>
-            {children}
-          </div>
+          children
       }
-    </>
+    </ContentDiv>
   )
 }

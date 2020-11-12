@@ -6,7 +6,8 @@ export const Routes = Object.freeze({
   ERROR: '/error',
   ARTICLE: '/article/:title',
   CATEGORY: '/categories/:category',
-  HOME: ''
+  HOME: '',
+  ROOT: '/'
 })
 
 export const Languages = Object.freeze({

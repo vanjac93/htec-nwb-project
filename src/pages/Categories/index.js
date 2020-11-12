@@ -51,7 +51,7 @@ export default function Categories() {
           loading: false,
           error: error.response.data.message ? error.response.data.message : true
         }))
-        swal({ icon: 'warning', title: 'Something went wrong!', text: error.response.data.message })
+        swal({ icon: 'warning', title: t('Something went wrong!'), text: error.response.data.message })
       }
     }
 
@@ -102,9 +102,9 @@ export default function Categories() {
               }}
               to={Routes.CATEGORY.replace(':category', category.category)}
               >
-                <h3 style={{margin: 10, textTransform: 'uppercase'}}>
+                <h5 style={{margin: 10, textTransform: 'uppercase'}}>
                   {category.category}
-                </h3>
+                </h5>
               </Link>
               {category.open ?
                 <ArrowDown size={30} />

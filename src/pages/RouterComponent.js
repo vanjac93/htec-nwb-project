@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import Menu from '~/common/Menu'
 import { Routes } from '~/Constants'
 import Error from './Error'
+import CommonLayout from '~/common/CommonLayout'
 
 const Article = React.lazy(() => import('./Article'))
 const Categories = React.lazy(() => import('./Categories'))
@@ -15,11 +16,11 @@ const TopNews = React.lazy(() => import('./TopNews'))
 export default function RouterComponent() {
   const { t } = useTranslation()
   return (
-    <Router>
+    <Router >
       <Menu />
-      <Suspense fallback={<p>{t('Loading...')}</p>}>
+      <Suspense fallback={<CommonLayout header={t('Loading...')} />}>
         <Switch>
-          <Route exact path={[Routes.HOME, '/', Routes.TOP_NEWS]} component={TopNews} />
+          <Route exact path={[Routes.HOME, Routes.ROOT, Routes.TOP_NEWS]} component={TopNews} />
           <Route exact path={Routes.CATEGORIES} component={Categories} />
           <Route exact path={Routes.CATEGORY} component={Category} />
           <Route exact path={Routes.SEARCH} component={Search} />

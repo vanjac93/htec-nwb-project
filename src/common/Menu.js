@@ -17,8 +17,10 @@ const StyledMenu = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 40px;
+    height: ${props => props.theme.menu.height};
     border-bottom: 1px solid #8a7f8a;
+    box-sizing: border-box; 
+    background-color: #b3cfe7;
 `
 
 const MenuButton = styled.button`
@@ -26,16 +28,17 @@ const MenuButton = styled.button`
     height: 100%;
     outline: inherit;
     padding: 10px;
-    background-color: white;
+    /* color: white; */
+    background-color: #b3cfe7;
     &:hover:enabled {
         cursor: pointer;
-        background-color: ${({ isActive }: ButtonProps) => isActive ? 'cadetblue' : '#b3cfe7'};
+        background-color: ${({ isActive }: ButtonProps) => isActive ? 'cadetblue' : '#99c8c9'};
     }
     &:disabled {
       cursor: not-allowed;
     }
     ${({ isActive }: ButtonProps) => isActive && css`
-        background-color:cadetblue;
+        background-color: cadetblue;
     `
 }
 `
@@ -53,7 +56,6 @@ export default function Menu() {
   }, [pathname])
 
   useEffect(() => {
-
     const handleResize = () => {
       if(!smallScreen && document.body.clientWidth < SmallScreenBreakpoint) {
         setSmallScreen(true)
@@ -64,7 +66,6 @@ export default function Menu() {
     }
 
     window.addEventListener('resize', handleResize)
-
     return () => {
       window.removeEventListener('resize', handleResize)
     }
@@ -92,7 +93,7 @@ export default function Menu() {
     }
     return <div>
       <Link to={Routes.TOP_NEWS}>
-        <MenuButton isActive={activeItem === Routes.TOP_NEWS}>{t('Top news')}</MenuButton>
+        <MenuButton isActive={activeItem === Routes.TOP_NEWS || activeItem === Routes.ROOT || activeItem===Routes.HOME}>{t('Top news')}</MenuButton>
       </Link>
       <Link to={Routes.CATEGORIES}>
         <MenuButton isActive={activeItem === Routes.CATEGORIES}>{t('Categories')}</MenuButton>
